@@ -38,7 +38,7 @@ function getSingleBook(req, res) {
             const { id } = req.params;
             const book = yield prisma.book.findUnique({
                 where: {
-                    id: Number(id),
+                    id: id,
                 },
                 include: { User: true },
             });
@@ -88,7 +88,7 @@ function editBook(req, res) {
             const { title, author, finished } = req.body;
             const book = yield prisma.book.update({
                 where: {
-                    id: Number(id),
+                    id: id,
                 },
                 data: {
                     title,
@@ -113,7 +113,7 @@ function deleteBook(req, res) {
             const { id } = req.params;
             yield prisma.book.delete({
                 where: {
-                    id: Number(id),
+                    id: id,
                 },
             });
             return res.status(200).json({ message: "OK" });

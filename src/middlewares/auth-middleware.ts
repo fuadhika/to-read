@@ -62,7 +62,7 @@ export async function checkOwnership(
 
     if (path === "books") {
       const book = await prisma.book.findUnique({
-        where: { id: Number(id) },
+        where: { id: id },
         include: { User: true },
       });
 
@@ -72,7 +72,7 @@ export async function checkOwnership(
 
     if (path === "users") {
       const user = await prisma.user.findUnique({
-        where: { id: Number(id) },
+        where: { id: id },
       });
 
       if (req.user?.id !== user?.id)

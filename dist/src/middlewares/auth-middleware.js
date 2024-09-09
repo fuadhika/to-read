@@ -64,7 +64,7 @@ function checkOwnership(req, res, next) {
             const path = req.originalUrl.split("/")[3];
             if (path === "books") {
                 const book = yield prisma.book.findUnique({
-                    where: { id: Number(id) },
+                    where: { id: id },
                     include: { User: true },
                 });
                 if (((_b = req.user) === null || _b === void 0 ? void 0 : _b.id) !== (book === null || book === void 0 ? void 0 : book.User.id))
@@ -72,7 +72,7 @@ function checkOwnership(req, res, next) {
             }
             if (path === "users") {
                 const user = yield prisma.user.findUnique({
-                    where: { id: Number(id) },
+                    where: { id: id },
                 });
                 if (((_c = req.user) === null || _c === void 0 ? void 0 : _c.id) !== (user === null || user === void 0 ? void 0 : user.id))
                     return res.status(403).json({ error: "Access denied" });

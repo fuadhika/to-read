@@ -29,7 +29,7 @@ export async function getSingleUser(
 
     const user = await prisma.user.findUnique({
       where: {
-        id: Number(id),
+        id: id,
       },
     });
 
@@ -56,7 +56,7 @@ export async function editUser(
 
     await prisma.user.update({
       where: {
-        id: Number(id),
+        id: id,
       },
       data: {
         fullName,
@@ -79,7 +79,7 @@ export async function deleteUser(
     const { id } = req.params;
 
     await prisma.user.delete({
-      where: { id: Number(id) },
+      where: { id: id },
     });
 
     res.clearCookie("token");

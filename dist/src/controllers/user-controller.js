@@ -34,7 +34,7 @@ function getSingleUser(req, res, next) {
             const { id } = req.params;
             const user = yield prisma.user.findUnique({
                 where: {
-                    id: Number(id),
+                    id: id,
                 },
             });
             if (!user)
@@ -56,7 +56,7 @@ function editUser(req, res, next) {
             const { fullName } = req.body;
             yield prisma.user.update({
                 where: {
-                    id: Number(id),
+                    id: id,
                 },
                 data: {
                     fullName,
@@ -75,7 +75,7 @@ function deleteUser(req, res, next) {
         try {
             const { id } = req.params;
             yield prisma.user.delete({
-                where: { id: Number(id) },
+                where: { id: id },
             });
             res.clearCookie("token");
             req.user = null;
